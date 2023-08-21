@@ -3,12 +3,15 @@ package com.musicplayer.moviecatch.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.musicplayer.moviecatch.R
 import com.musicplayer.moviecatch.models.Result
 
-class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MyCustomHolder>() {
+class MovieAdapter(private val isFirstScreen: Boolean = true) :
+    RecyclerView.Adapter<MovieAdapter.MyCustomHolder>() {
     var liveData: List<Result>? = null
 
     fun setList(liveData: List<Result>) {
@@ -27,16 +30,25 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MyCustomHolder>() {
     }
 
     override fun getItemCount(): Int {
-        if (liveData == null){
+        if (liveData == null) {
             return 0
+        } else if (isFirstScreen) {
+            return 4
         }
         return liveData!!.size
     }
 
     class MyCustomHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val title = itemView.findViewById<TextView>(R.id.title)
-        fun bind(data: Result){
-            title.text = data.title
+        val textTitle = itemView.findViewById<TextView>(R.id.textTitle)
+        val txtGenre = itemView.findViewById<TextView>(R.id.txtGenre)
+        val posterView = itemView.findViewById<ImageView>(R.id.posterView)
+
+        fun bind(data: Result) {
+            textTitle.text = data.title
+            txtGenre.text = "Test"
+            Glide.with(posterView)
+                .load("https://image.tmdb.org/t/p/w342/"+data.poster_path)
+                .into(posterView)
         }
     }
 }
