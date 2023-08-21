@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">MovieCatch</string>
+    <string name="movie_catch">Movie Catch</string>
+    <string name="popular_movies">Popular Movies</string>
+    <string name="see_all">See All</string>
+    <string name="recent_movies">Recent Movies</string>
 </resources>
