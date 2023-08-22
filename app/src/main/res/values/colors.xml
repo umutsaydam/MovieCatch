@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="white">#FFFFFF</color>
 
     <color name="black_200">#353535</color>
-    <color name="end_color">#6F606060</color>
+    <color name="end_color">#6F6060</color>
     <color name="icon_color">#F95861</color>
-    <color name="action_color">#AE000000</color>
+    <color name="action_color">#AE0000</color>
     <color name="light_dark_bg">#FFFFFF</color>
-    <color name="text_color">#3333333</color>
+    <color name="text_color">#333333</color>
 
 
 </resources>
