@@ -1,4 +1,4 @@
-package com.musicplayer.moviecatch.ui.fragments.home
+package com.musicplayer.moviecatch.ui.fragments.home.pages
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
