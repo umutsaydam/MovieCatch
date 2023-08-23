@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [GenreDatabase::class], version = 1, exportSchema = false)
+@Database(entities = [GenreData::class], version = 1, exportSchema = false)
 abstract class GenreDatabase : RoomDatabase() {
     abstract fun getDAO(): GenreDao
 

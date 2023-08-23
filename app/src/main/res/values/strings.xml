@@ -8,4 +8,16 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="home">home</string>
     <string name="favorites">favorites</string>
+    <string name="prev">Prev</string>
+    <string name="first_title">Offline_database</string>
+    <string name="first_subtitle">Create your own favorite list navigate your list without internet</string>
+    <string name="second_title">Millions of Movies</string>
+    <string name="second_subtitle">Reach millions of movies instantly</string>
+    <string name="third_title">Freedom to Translate</string>
+    <string name="third_subtitle">Translate the movie details you don\'t understand into your language with one touch</string>
+    <string name="fourth_title">Night Mode</string>
+    <string name="fourth_subtitle">Travel comfortably at night without straining your eyes</string>
+    <string name="fifth_title">Advance Notification</string>
+    <string name="fifth_subtitle">Let me inform you before the date of the vision of the films in your favorite your list</string>
+    <string name="next">Next</string>
 </resources>
