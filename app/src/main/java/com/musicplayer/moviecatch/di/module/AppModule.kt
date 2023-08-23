@@ -1,5 +1,8 @@
 package com.musicplayer.moviecatch.di.module
 
+import android.app.Application
+import com.musicplayer.moviecatch.di.dao.GenreDao
+import com.musicplayer.moviecatch.di.dao.GenreDatabase
 import com.musicplayer.moviecatch.di.retrofit.RetrofitServiceInstance
 import dagger.Module
 import dagger.Provides
@@ -14,6 +17,18 @@ import javax.inject.Singleton
 class AppModule {
 
     private val baseURL = "https://api.themoviedb.org/"
+
+    @Provides
+    @Singleton
+    fun getAppDB(context: Application): GenreDatabase {
+        return GenreDatabase.getAppDB(context)
+    }
+
+    @Provides
+    @Singleton
+    fun getDao(appDB: GenreDatabase): GenreDao {
+        return appDB.getDAO()
+    }
 
     @Provides
     @Singleton
