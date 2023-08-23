@@ -34,10 +34,10 @@ class MainFragment : Fragment() {
                     ?.navigate(R.id.homeFragment)
 
                 R.id.nav_favorites -> childFragmentManager.primaryNavigationFragment?.findNavController()
-                    ?.navigate(R.id.nav_favorites)
+                    ?.navigate(R.id.favoriteFragment)
 
                 R.id.nav_settings -> childFragmentManager.primaryNavigationFragment?.findNavController()
-                    ?.navigate(R.id.nav_settings)
+                    ?.navigate(R.id.settingsFragment)
 
             }
         }
