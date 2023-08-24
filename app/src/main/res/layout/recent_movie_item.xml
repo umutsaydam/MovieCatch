@@ -54,10 +54,12 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:layout_width="10dp"
-                android:layout_height="10dp"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
                 android:layout_marginEnd="4dp"
-                android:src="@color/cardview_light_background" />
+                android:layout_gravity="center"
+                android:src="@drawable/ic_star"
+                app:tint="@color/icon_color" />
 
             <TextView
                 android:id="@+id/txtVoteAverage"
