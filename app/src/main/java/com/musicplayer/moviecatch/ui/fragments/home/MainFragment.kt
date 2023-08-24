@@ -8,18 +8,27 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.musicplayer.moviecatch.R
 import com.musicplayer.moviecatch.databinding.FragmentMainBinding
+import com.musicplayer.moviecatch.prefs.SessionManager
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainFragment : Fragment() {
     private var _binding: FragmentMainBinding? = null
     private val binding get() = _binding!!
 
+    @Inject
+    lateinit var session: SessionManager
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View? {
         _binding = FragmentMainBinding.inflate(inflater, container, false)
+
+        if (session.getIsFirstRun()) {
+            session.setIsFirstRun(false)
+        }
 
         setupTabBar()
 

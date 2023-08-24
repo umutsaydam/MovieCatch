@@ -8,14 +8,18 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.musicplayer.moviecatch.R
+import com.musicplayer.moviecatch.di.dao.GenreData
 import com.musicplayer.moviecatch.models.Result
+import java.util.Locale
 
 class RecentMovieAdapter(private val isFirstScreen: Boolean = true) :
     RecyclerView.Adapter<RecentMovieAdapter.MyCustomHolder>() {
     private var liveData: List<Result>? = null
+    private var genreList: List<GenreData>? = null
 
-    fun setList(liveData: List<Result>) {
+    fun setLists(liveData: List<Result>, genreList: List<GenreData>) {
         this.liveData = liveData
+        this.genreList = genreList
         notifyDataSetChanged()
     }
 
@@ -26,7 +30,7 @@ class RecentMovieAdapter(private val isFirstScreen: Boolean = true) :
     }
 
     override fun onBindViewHolder(holder: MyCustomHolder, position: Int) {
-        holder.bind(liveData!![position])
+        holder.bind(liveData!![position], genreList!!)
     }
 
     override fun getItemCount(): Int {
@@ -45,8 +49,28 @@ class RecentMovieAdapter(private val isFirstScreen: Boolean = true) :
         private val txtReleaseDate = itemView.findViewById<TextView>(R.id.txtReleaseDate)
         private val txtVoteAverage = itemView.findViewById<TextView>(R.id.txtVoteAverage)
 
-        fun bind(data: Result) {
+        fun bind(data: Result, genreList: List<GenreData>) {
             textTitle.text = data.title
+            txtGenre.text = ""
+
+            val lang = Locale.getDefault().language
+
+            var genres = ""
+            for (id in data.genre_ids) {
+                val result = genreList.find { x -> x.genre_id == id }
+
+                if (result != null) {
+                    genres += if (lang == "tr") {
+                        "${result.tr_name}, "
+                    } else {
+                        "${result.en_name}, "
+                    }
+                }
+            }
+
+            genres = genres.substring(0, genres.lastIndex - 1)
+            txtGenre.text = genres
+
             txtReleaseDate.text = data.release_date
             txtVoteAverage.text = data.vote_average.toString() + " / 10"
             Glide.with(posterView)

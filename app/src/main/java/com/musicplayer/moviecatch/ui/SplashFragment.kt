@@ -13,12 +13,18 @@ import com.musicplayer.moviecatch.MainActivity
 import com.musicplayer.moviecatch.R
 import com.musicplayer.moviecatch.databinding.FragmentFavoriteBinding
 import com.musicplayer.moviecatch.databinding.FragmentSplashBinding
+import com.musicplayer.moviecatch.prefs.SessionManager
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class SplashFragment : Fragment() {
     private var _binding: FragmentSplashBinding? = null
     private val binding get() = _binding!!
+
+    @Inject
+    lateinit var sessionManager: SessionManager
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -26,7 +32,11 @@ class SplashFragment : Fragment() {
         _binding = FragmentSplashBinding.inflate(inflater, container, false)
 
         Handler(Looper.getMainLooper()).postDelayed({
-            findNavController().navigate(R.id.action_splashFragment_to_appIntroFragment)
+            if (sessionManager.getIsFirstRun()) {
+                findNavController().navigate(R.id.action_splashFragment_to_appIntroFragment)
+            } else {
+                findNavController().navigate(R.id.action_splashFragment_to_mainFragment)
+            }
         }, 3000)
 
         return binding.root

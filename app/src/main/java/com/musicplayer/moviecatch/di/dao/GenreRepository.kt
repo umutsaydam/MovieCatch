@@ -1,11 +1,12 @@
 package com.musicplayer.moviecatch.di.dao
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import javax.inject.Inject
 
 class GenreRepository @Inject constructor(private val genreDao: GenreDao) {
 
-    val readAllData: LiveData<List<GenreData>> = genreDao.readAllData()
+    val readAllData: List<GenreData> = genreDao.readAllData()
 
     fun addGenre(genre: GenreData) {
         genreDao.addGenre(genre)

@@ -8,16 +8,21 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.musicplayer.moviecatch.R
+import com.musicplayer.moviecatch.di.dao.GenreData
 import com.musicplayer.moviecatch.models.Result
+import java.util.Locale
 
 class MovieAdapter(private val isFirstScreen: Boolean = true) :
     RecyclerView.Adapter<MovieAdapter.MyCustomHolder>() {
-    var liveData: List<Result>? = null
+    private var liveData: List<Result>? = null
+    private var genreList: List<GenreData>? = null
 
-    fun setList(liveData: List<Result>) {
+    fun setLists(liveData: List<Result>, genreList: List<GenreData>) {
         this.liveData = liveData
+        this.genreList = genreList
         notifyDataSetChanged()
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyCustomHolder {
         return MyCustomHolder(
@@ -26,7 +31,7 @@ class MovieAdapter(private val isFirstScreen: Boolean = true) :
     }
 
     override fun onBindViewHolder(holder: MyCustomHolder, position: Int) {
-        holder.bind(liveData!![position])
+        holder.bind(liveData!![position], genreList!!)
     }
 
     override fun getItemCount(): Int {
@@ -39,15 +44,34 @@ class MovieAdapter(private val isFirstScreen: Boolean = true) :
     }
 
     class MyCustomHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val textTitle = itemView.findViewById<TextView>(R.id.textTitle)
-        val txtGenre = itemView.findViewById<TextView>(R.id.txtGenre)
-        val posterView = itemView.findViewById<ImageView>(R.id.posterView)
+        private val textTitle: TextView = itemView.findViewById(R.id.textTitle)
+        private val txtGenre: TextView = itemView.findViewById(R.id.txtGenre)
+        private val posterView: ImageView = itemView.findViewById(R.id.posterView)
 
-        fun bind(data: Result) {
+        fun bind(data: Result, genreList: List<GenreData>) {
             textTitle.text = data.title
-            txtGenre.text = "Test"
+            txtGenre.text = ""
+
+            val lang = Locale.getDefault().language
+
+            var genres = ""
+            for (id in data.genre_ids) {
+                val result = genreList.find { x -> x.genre_id == id }
+
+                if (result != null) {
+                    genres += if (lang == "tr") {
+                        "${result.tr_name}, "
+                    } else {
+                        "${result.en_name}, "
+                    }
+                }
+            }
+
+            genres = genres.substring(0, genres.lastIndex - 1)
+            txtGenre.text = genres
+
             Glide.with(posterView)
-                .load("https://image.tmdb.org/t/p/w342/"+data.poster_path)
+                .load("https://image.tmdb.org/t/p/w342/" + data.poster_path)
                 .into(posterView)
         }
     }

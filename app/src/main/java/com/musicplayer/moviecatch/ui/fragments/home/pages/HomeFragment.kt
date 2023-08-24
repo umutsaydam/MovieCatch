@@ -8,11 +8,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.musicplayer.moviecatch.R
 import com.musicplayer.moviecatch.adapter.MovieAdapter
 import com.musicplayer.moviecatch.adapter.RecentMovieAdapter
 import com.musicplayer.moviecatch.databinding.FragmentHomeBinding
+import com.musicplayer.moviecatch.di.dao.GenreData
+import com.musicplayer.moviecatch.viewmodel.GenreViewModel
 import com.musicplayer.moviecatch.viewmodel.HomePageViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -27,9 +27,14 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var adapter: MovieAdapter
     private lateinit var recentMovieAdapter: RecentMovieAdapter
+    private var genreList: List<GenreData>? = null
 
     private val viewModel by lazy {
         ViewModelProvider(this, defaultViewModelProviderFactory)[HomePageViewModel::class.java]
+    }
+
+    private val genreViewModel by lazy {
+        ViewModelProvider(this, defaultViewModelProviderFactory)[GenreViewModel::class.java]
     }
 
 
@@ -44,7 +49,7 @@ class HomeFragment : Fragment() {
 
         viewModel.getObserverLiveData(true).observe(viewLifecycleOwner) {
             if (it != null) {
-                adapter.setList(it.results)
+                adapter.setLists(it.results,genreList!!)
             } else {
                 Log.d("R/T", "null geldi")
             }
@@ -52,13 +57,20 @@ class HomeFragment : Fragment() {
 
         viewModel.getObserverLiveData(false).observe(viewLifecycleOwner) {
             if (it != null) {
-                recentMovieAdapter.setList(it.results)
+                recentMovieAdapter.setLists(it.results, genreList!!)
             } else {
                 Log.d("R/T", "NULL GELDI recent")
             }
         }
-        fetchMovies()
 
+        genreViewModel.getRecordsObserver().observe(
+            viewLifecycleOwner
+        ) {
+            if (it != null) {
+                genreList = it
+                fetchMovies()
+            }
+        }
 
         return binding.root
     }
