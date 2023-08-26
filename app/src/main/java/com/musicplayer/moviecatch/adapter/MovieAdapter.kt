@@ -60,7 +60,7 @@ class MovieAdapter(private val isFirstScreen: Boolean = true, private val listen
             txtGenre.text = ""
 
             val lang = Locale.getDefault().language
-
+            genres = ""
             for (id in data.genre_ids) {
                 val result = genreList.find { x -> x.genre_id == id }
 

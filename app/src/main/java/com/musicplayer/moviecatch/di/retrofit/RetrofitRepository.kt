@@ -4,6 +4,9 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.musicplayer.moviecatch.models.Genre
 import com.musicplayer.moviecatch.models.Movie
+import com.musicplayer.moviecatch.models.ResultX
+import com.musicplayer.moviecatch.models.Trailer
+import com.musicplayer.moviecatch.models.YoutubeTrailerModel
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -50,6 +53,52 @@ class RetrofitRepository @Inject constructor(private val retrofitServiceInstance
             }
 
         })
+    }
+
+    fun getMovieTrailer(id: String, trailersList: MutableLiveData<Trailer>) {
+        retrofitServiceInstance.getTrailer(id).enqueue(object : Callback<Trailer> {
+            override fun onResponse(call: Call<Trailer>, response: Response<Trailer>) {
+                val result = response.body() as Trailer
+                var pureTrailer: Trailer? = null
+                var resultX: ArrayList<ResultX>? = null
+                result.results.forEach {
+                    if (it.type == "Trailer" && it.official) {
+                        if (pureTrailer == null) {
+                            resultX = ArrayList<ResultX>()
+                            resultX!!.add(ResultX(it.key, it.name, it.type, it.official, it.id))
+                            pureTrailer = Trailer(result.id, resultX!!)
+                        } else {
+                            resultX!!.add(ResultX(it.key, it.name, it.type, it.official, it.id))
+                        }
+                    }
+                }
+                Log.d("R/R", pureTrailer.toString())
+                trailersList.postValue(pureTrailer)
+            }
+
+            override fun onFailure(call: Call<Trailer>, t: Throwable) {
+                Log.d("R/R", t.message.toString())
+                trailersList.postValue(null)
+            }
+        })
+    }
+
+    fun getYoutubeVideos(key: String, youtubeTrailersList: MutableLiveData<YoutubeTrailerModel>) {
+        retrofitServiceInstance.getVideos("https://www.youtube.com/oembed?url=youtube.com/watch?v=${key}&format=json")
+            .enqueue(object : Callback<YoutubeTrailerModel> {
+                override fun onResponse(
+                    call: Call<YoutubeTrailerModel>,
+                    response: Response<YoutubeTrailerModel>,
+                ) {
+                    youtubeTrailersList.postValue(response.body())
+                }
+
+                override fun onFailure(call: Call<YoutubeTrailerModel>, t: Throwable) {
+                    Log.d("R/R", t.message.toString())
+                    youtubeTrailersList.postValue(null)
+                }
+
+            })
     }
 
 }

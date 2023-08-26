@@ -122,6 +122,15 @@
                 android:text="Jack Reacher must uncover the truth behind a major government conspiracy in order to clear his name. On the run as a fugitive from the law, Reacher uncovers a potential secret from his past that could change his life forever"
                 android:textSize="16sp" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/videoRecycler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="175dp"
+                android:layout_marginTop="75dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/trailer_item" />
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 
