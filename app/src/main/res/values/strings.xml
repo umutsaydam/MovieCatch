@@ -20,4 +20,6 @@
     <string name="fifth_title">Advance Notification</string>
     <string name="fifth_subtitle">Let me inform you before the date of the vision of the films in your favorite your list</string>
     <string name="next">Next</string>
+    <string name="back">back</string>
+    <string name="star">star</string>
 </resources>
