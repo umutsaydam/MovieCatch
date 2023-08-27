@@ -14,12 +14,9 @@ import com.musicplayer.moviecatch.adapter.TrailerAdapter
 import com.musicplayer.moviecatch.databinding.FragmentMovieDetailBinding
 import com.musicplayer.moviecatch.models.Result
 import com.musicplayer.moviecatch.models.ResultX
-import com.musicplayer.moviecatch.models.Trailer
-import com.musicplayer.moviecatch.models.YoutubeTrailerModel
 import com.musicplayer.moviecatch.viewmodel.MovieDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
