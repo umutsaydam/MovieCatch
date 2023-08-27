@@ -9,7 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.musicplayer.moviecatch.R
 import com.musicplayer.moviecatch.adapter.TrailerAdapter
 import com.musicplayer.moviecatch.databinding.FragmentMovieDetailBinding
 import com.musicplayer.moviecatch.models.Result
@@ -91,6 +93,10 @@ class MovieDetailFragment : Fragment() {
             }
 
             loadTrailers()
+
+            binding.backImg.setOnClickListener {
+                findNavController().navigate(R.id.action_movieDetailFragment_to_homeFragment)
+            }
         }
     }
 

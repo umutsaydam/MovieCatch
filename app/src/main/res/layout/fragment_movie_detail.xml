@@ -36,6 +36,7 @@
                 android:elevation="5dp"
                 app:layout_scrollFlags="scroll|enterAlways">
                 <ImageView
+                    android:id="@+id/backImg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:contentDescription="@string/back"
