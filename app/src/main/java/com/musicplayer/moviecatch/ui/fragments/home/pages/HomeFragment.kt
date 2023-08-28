@@ -89,7 +89,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
         recycler.layoutManager = lmHorizontal
         recycler.adapter = adapter
 
-        recentMovieAdapter = RecentMovieAdapter()
+        recentMovieAdapter = RecentMovieAdapter(true, this)
         val recentRecycler = binding.recyclerRecentMv
         recentRecycler.layoutManager = lmVertical
         recentRecycler.adapter = recentMovieAdapter
