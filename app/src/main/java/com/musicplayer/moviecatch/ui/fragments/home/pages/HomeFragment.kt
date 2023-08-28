@@ -1,6 +1,7 @@
 package com.musicplayer.moviecatch.ui.fragments.home.pages
 
 import android.os.Bundle
+import android.os.Parcelable
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -15,6 +16,7 @@ import com.musicplayer.moviecatch.adapter.RecentMovieAdapter
 import com.musicplayer.moviecatch.databinding.FragmentHomeBinding
 import com.musicplayer.moviecatch.di.dao.GenreData
 import com.musicplayer.moviecatch.models.Result
+import com.musicplayer.moviecatch.util.Constants
 import com.musicplayer.moviecatch.util.OnItemClickListener
 import com.musicplayer.moviecatch.viewmodel.GenreViewModel
 import com.musicplayer.moviecatch.viewmodel.HomePageViewModel
@@ -47,7 +49,7 @@ class HomeFragment : Fragment(), OnItemClickListener {
     ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
-
+        seeAllListeners()
         initRecyclerViews()
 
         viewModel.getObserverLiveData(true).observe(viewLifecycleOwner) {
@@ -74,8 +76,22 @@ class HomeFragment : Fragment(), OnItemClickListener {
                 fetchMovies()
             }
         }
-
         return binding.root
+    }
+
+    private fun seeAllListeners() {
+        val bundle = Bundle()
+        binding.popularMoviesLinear.setOnClickListener {
+            bundle.putString(Constants.BUNDLE_SEE_ALL_MOVIE_KEY, Constants.BUNDLE_SEE_ALL_POPULAR_KEY)
+            bundle.putParcelableArrayList("genreList", ArrayList<Parcelable>(genreList!!))
+            findNavController().navigate(R.id.action_homeFragment_to_seeAllFragment, bundle)
+        }
+
+        binding.recentMoviesLinear.setOnClickListener {
+            bundle.putString(Constants.BUNDLE_SEE_ALL_MOVIE_KEY, Constants.BUNDLE_SEE_ALL_RECENT_KEY)
+            bundle.putParcelableArrayList("genreList", ArrayList<Parcelable>(genreList!!))
+            findNavController().navigate(R.id.action_homeFragment_to_seeAllFragment, bundle)
+        }
     }
 
     private fun initRecyclerViews() {
