@@ -37,7 +37,6 @@ class SeeAllFragment : Fragment(), OnItemClickListener {
     ): View {
         _binding = FragmentSeeAllBinding.inflate(inflater, container, false)
 
-
         if (arguments != null) {
             seeAllMovieKey = arguments?.getString(Constants.BUNDLE_SEE_ALL_MOVIE_KEY).toString()
             genreList = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {

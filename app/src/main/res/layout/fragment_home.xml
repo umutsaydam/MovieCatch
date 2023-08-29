@@ -16,15 +16,28 @@
         android:paddingVertical="20dp">
 
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_weight="1"
             android:text="@string/movie_catch"
             android:textSize="16sp"
             android:textStyle="bold" />
 
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView"
+            android:layout_width="0dp"
+            android:layout_weight="0.9"
+            android:layout_height="60dp"
+            android:layout_margin="16dp"
+            android:layout_gravity="center_vertical"
+            android:elevation="8dp"
+            android:iconifiedByDefault="false"
+            android:queryHint="Search Movie"
+            android:visibility="invisible"
+            android:clickable="false"/>
+
         <RelativeLayout
+            android:id="@+id/icSearchLayout"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_gravity="center"
