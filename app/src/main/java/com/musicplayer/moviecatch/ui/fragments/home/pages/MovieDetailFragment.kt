@@ -95,7 +95,7 @@ class MovieDetailFragment : Fragment() {
             loadTrailers()
 
             binding.backImg.setOnClickListener {
-                findNavController().navigate(R.id.action_movieDetailFragment_to_homeFragment)
+                activity?.onBackPressedDispatcher?.onBackPressed()
             }
         }
     }
