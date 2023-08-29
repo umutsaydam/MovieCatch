@@ -10,8 +10,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.musicplayer.moviecatch.R
-import com.musicplayer.moviecatch.adapter.MovieAdapter
-import com.musicplayer.moviecatch.adapter.RecentMovieAdapter
+import com.musicplayer.moviecatch.adapter.SeeAllAdapter
 import com.musicplayer.moviecatch.databinding.FragmentSeeAllBinding
 import com.musicplayer.moviecatch.di.dao.GenreData
 import com.musicplayer.moviecatch.models.Result
@@ -26,8 +25,7 @@ class SeeAllFragment : Fragment(), OnItemClickListener {
     private val binding get() = _binding!!
     private var seeAllMovieKey = ""
     private var genreList: List<GenreData>? = null
-    val movieAdapter = MovieAdapter(false, this)
-    val recentMovieAdapter = RecentMovieAdapter(false, this)
+    private lateinit var seeAllAdapter: SeeAllAdapter
 
     private val viewModel by lazy {
         ViewModelProvider(this, defaultViewModelProviderFactory)[SeeAllViewModel::class.java]
@@ -42,13 +40,15 @@ class SeeAllFragment : Fragment(), OnItemClickListener {
 
         if (arguments != null) {
             seeAllMovieKey = arguments?.getString(Constants.BUNDLE_SEE_ALL_MOVIE_KEY).toString()
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                genreList = arguments?.getParcelableArrayList("genreList", GenreData::class.java)
-            }else{
-                genreList = arguments?.getParcelableArrayList("genreList")
+            genreList = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                arguments?.getParcelableArrayList("genreList", GenreData::class.java)
+            } else {
+                arguments?.getParcelableArrayList("genreList")
             }
         }
         binding.seeAllTitleTxt.text = seeAllMovieKey
+
+        seeAllAdapter = SeeAllAdapter(this)
 
         initRecycler()
 
@@ -56,16 +56,20 @@ class SeeAllFragment : Fragment(), OnItemClickListener {
             if (it != null) {
                 when (seeAllMovieKey) {
                     Constants.BUNDLE_SEE_ALL_POPULAR_KEY -> {
-                        movieAdapter.setLists(it.results, genreList!!)
+                        seeAllAdapter.setLists(it.results, genreList!!)
                     }
 
                     Constants.BUNDLE_SEE_ALL_RECENT_KEY -> {
-                        recentMovieAdapter.setLists(it.results, genreList!!)
+                        seeAllAdapter.setLists(it.results, genreList!!)
                     }
                 }
             } else {
                 Log.d("R/S", "null")
             }
+        }
+
+        binding.backImg.setOnClickListener {
+            activity?.onBackPressedDispatcher?.onBackPressed()
         }
 
         viewModel.loadMovies("1")
@@ -74,14 +78,13 @@ class SeeAllFragment : Fragment(), OnItemClickListener {
 
     private fun initRecycler() {
         val recycler = binding.seeAllRecycler
+        recycler.adapter = seeAllAdapter
         when (seeAllMovieKey) {
             Constants.BUNDLE_SEE_ALL_POPULAR_KEY -> {
-                recycler.adapter = movieAdapter
                 viewModel.setMovieKey(seeAllMovieKey)
             }
 
             Constants.BUNDLE_SEE_ALL_RECENT_KEY -> {
-                recycler.adapter = recentMovieAdapter
                 viewModel.setMovieKey(seeAllMovieKey)
             }
         }
