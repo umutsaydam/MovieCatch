@@ -101,4 +101,19 @@ class RetrofitRepository @Inject constructor(private val retrofitServiceInstance
             })
     }
 
+    fun getMoviesBySearched(page: String, query: String, moviesLiveData: MutableLiveData<Movie>) {
+        retrofitServiceInstance.getMoviesBySearched(page, query)
+            .enqueue(object : Callback<Movie> {
+                override fun onResponse(call: Call<Movie>, response: Response<Movie>) {
+                    Log.d("R/W", "data geldi"+response.body().toString())
+                    moviesLiveData.postValue(response.body())
+                }
+
+                override fun onFailure(call: Call<Movie>, t: Throwable) {
+                    Log.d("R/W", "data null geldi"+t.message.toString())
+                    moviesLiveData.postValue(null)
+                }
+            })
+    }
+
 }

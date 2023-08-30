@@ -14,7 +14,10 @@ import com.musicplayer.moviecatch.models.Result
 import com.musicplayer.moviecatch.util.OnItemClickListener
 import java.util.Locale
 
-class RecentMovieAdapter(private val isFirstScreen: Boolean = true,  private val listener: OnItemClickListener) :
+class RecentMovieAdapter(
+    private val isFirstScreen: Boolean = true,
+    private val listener: OnItemClickListener,
+) :
     RecyclerView.Adapter<RecentMovieAdapter.MyCustomHolder>() {
     private var liveData: List<Result>? = null
     private var genreList: List<GenreData>? = null
@@ -63,19 +66,21 @@ class RecentMovieAdapter(private val isFirstScreen: Boolean = true,  private val
             val lang = Locale.getDefault().language
 
             genres = ""
-            for (id in data.genre_ids) {
-                val result = genreList.find { x -> x.genre_id == id }
+            if (data.genre_ids != null) {
+                for (id in data.genre_ids) {
+                    val result = genreList.find { x -> x.genre_id == id }
 
-                if (result != null) {
-                    genres += if (lang == "tr") {
-                        "${result.tr_name}, "
-                    } else {
-                        "${result.en_name}, "
+                    if (result != null) {
+                        genres += if (lang == "tr") {
+                            "${result.tr_name}, "
+                        } else {
+                            "${result.en_name}, "
+                        }
                     }
                 }
-            }
 
-            genres = genres.substring(0, genres.lastIndex - 1)
+                genres = genres.substring(0, genres.lastIndex - 1)
+            }
             txtGenre.text = genres
 
             txtReleaseDate.text = data.release_date

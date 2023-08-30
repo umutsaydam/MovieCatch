@@ -1,5 +1,6 @@
 package com.musicplayer.moviecatch.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.musicplayer.moviecatch.R
 import com.musicplayer.moviecatch.di.dao.GenreData
+import com.musicplayer.moviecatch.di.retrofit.RetrofitServiceInstance
 import com.musicplayer.moviecatch.models.Result
 import com.musicplayer.moviecatch.util.OnItemClickListener
 import java.util.Locale
@@ -57,22 +59,27 @@ class SeeAllAdapter(private val listener: OnItemClickListener) :
         fun bind(data: Result, genreList: List<GenreData>) {
             textTitle.text = data.title
             txtGenre.text = ""
-
             val lang = Locale.getDefault().language
             genres = ""
-            for (id in data.genre_ids) {
-                val result = genreList.find { x -> x.genre_id == id }
 
-                if (result != null) {
-                    genres += if (lang == "tr") {
-                        "${result.tr_name}, "
-                    } else {
-                        "${result.en_name}, "
+
+            if (data.genre_ids?.isNotEmpty()!!) {
+                for (id in data.genre_ids!!) {
+                    val result = genreList.find { x -> x.genre_id == id }
+
+                    if (result != null) {
+                        genres += if (lang == "tr") {
+                            "${result.tr_name}, "
+                        } else {
+                            "${result.en_name}, "
+                        }
                     }
+                    Log.d("R/E", result!!.en_name)
                 }
+                genres = genres.substring(0, genres.lastIndex - 1)
             }
 
-            genres = genres.substring(0, genres.lastIndex - 1)
+
             txtGenre.text = genres
 
             Glide.with(posterView)

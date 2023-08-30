@@ -9,9 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import com.musicplayer.moviecatch.R
 import com.musicplayer.moviecatch.adapter.TrailerAdapter
 import com.musicplayer.moviecatch.databinding.FragmentMovieDetailBinding
 import com.musicplayer.moviecatch.models.Result
@@ -27,7 +25,7 @@ class MovieDetailFragment : Fragment() {
     private var _binding: FragmentMovieDetailBinding? = null
     private val binding get() = _binding!!
     private var movie: Result? = null
-    private var genres: String? = null
+    private var genres: String = "dsfsdfdsfdf"
 
     private val viewModel by lazy {
         ViewModelProvider(this, defaultViewModelProviderFactory)[MovieDetailViewModel::class.java]
@@ -58,7 +56,7 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun initUI() {
-        if (movie != null && genres != null) {
+        if (movie != null) {
             binding.collapsingToolbar.title = " "
             binding.collapsingToolbar
 

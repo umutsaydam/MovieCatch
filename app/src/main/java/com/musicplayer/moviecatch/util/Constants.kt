@@ -8,4 +8,5 @@ object Constants {
     const val BUNDLE_SEE_ALL_MOVIE_KEY = "movieCategorySeeAll"
     const val BUNDLE_SEE_ALL_POPULAR_KEY = "Popular Movies"
     const val BUNDLE_SEE_ALL_RECENT_KEY = "Recent Movies"
+    const val BUNDLE_SEE_ALL_QUERY_KEY = "query"
 }

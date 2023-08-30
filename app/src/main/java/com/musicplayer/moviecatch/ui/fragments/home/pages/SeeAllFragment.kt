@@ -24,6 +24,7 @@ class SeeAllFragment : Fragment(), OnItemClickListener {
     private var _binding: FragmentSeeAllBinding? = null
     private val binding get() = _binding!!
     private var seeAllMovieKey = ""
+    private var query = ""
     private var genreList: List<GenreData>? = null
     private lateinit var seeAllAdapter: SeeAllAdapter
 
@@ -44,8 +45,10 @@ class SeeAllFragment : Fragment(), OnItemClickListener {
             } else {
                 arguments?.getParcelableArrayList("genreList")
             }
+            query = arguments?.getString(Constants.BUNDLE_SEE_ALL_QUERY_KEY).toString()
         }
         binding.seeAllTitleTxt.text = seeAllMovieKey
+        viewModel.setMovieKey(seeAllMovieKey)
 
         seeAllAdapter = SeeAllAdapter(this)
 
@@ -53,45 +56,34 @@ class SeeAllFragment : Fragment(), OnItemClickListener {
 
         viewModel.getObserverLiveData().observe(viewLifecycleOwner) {
             if (it != null) {
-                when (seeAllMovieKey) {
-                    Constants.BUNDLE_SEE_ALL_POPULAR_KEY -> {
-                        seeAllAdapter.setLists(it.results, genreList!!)
-                    }
-
-                    Constants.BUNDLE_SEE_ALL_RECENT_KEY -> {
-                        seeAllAdapter.setLists(it.results, genreList!!)
-                    }
-                }
+                Log.d("R/S", it.results.toString())
+                seeAllAdapter.setLists(it.results, genreList!!)
             } else {
                 Log.d("R/S", "null")
             }
+        }
+
+        if (query != ""){
+            viewModel.loadMovies("1", query)
+        }else{
+            viewModel.loadMovies("1")
         }
 
         binding.backImg.setOnClickListener {
             activity?.onBackPressedDispatcher?.onBackPressed()
         }
 
-        viewModel.loadMovies("1")
         return binding.root
     }
 
     private fun initRecycler() {
         val recycler = binding.seeAllRecycler
         recycler.adapter = seeAllAdapter
-        when (seeAllMovieKey) {
-            Constants.BUNDLE_SEE_ALL_POPULAR_KEY -> {
-                viewModel.setMovieKey(seeAllMovieKey)
-            }
-
-            Constants.BUNDLE_SEE_ALL_RECENT_KEY -> {
-                viewModel.setMovieKey(seeAllMovieKey)
-            }
-        }
     }
 
     override fun onItemClickListener(movie: Result, genres: String) {
         val bundle = Bundle()
-
+        Log.d("W8", movie.toString())
         bundle.putSerializable("movie", movie)
         bundle.putString("genres", genres)
         findNavController().navigate(R.id.action_seeAllFragment_to_movieDetailFragment, bundle)

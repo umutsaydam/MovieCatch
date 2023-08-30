@@ -26,6 +26,6 @@ interface RetrofitServiceInstance {
     @GET
     fun getVideos(@Url url: String): Call<YoutubeTrailerModel>
 
-    @GET("3/movie/movie?api_key=99effc409b6cda23954144eafe0cb25d")
-    fun getSuggestion(@Query("query") query: String): Call<Movie>
+    @GET("3/search/movie?api_key=99effc409b6cda23954144eafe0cb25d")
+    fun getMoviesBySearched(@Query("page") page: String, @Query("query") query: String): Call<Movie>
 }

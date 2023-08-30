@@ -13,16 +13,18 @@ class SeeAllViewModel @Inject constructor(private val repository: RetrofitReposi
     ViewModel() {
 
     var moviesLiveData: MutableLiveData<Movie> = MutableLiveData()
+
     private var movieKey: String = ""
 
     fun getObserverLiveData(): MutableLiveData<Movie> {
         return moviesLiveData
     }
 
-    fun loadMovies(page: String) {
+    fun loadMovies(page: String, query: String = "") {
         when (movieKey) {
             Constants.BUNDLE_SEE_ALL_POPULAR_KEY -> repository.getPopularMovies(page, moviesLiveData)
             Constants.BUNDLE_SEE_ALL_RECENT_KEY -> repository.getRecentMovies(page, moviesLiveData)
+            Constants.BUNDLE_SEE_ALL_QUERY_KEY -> repository.getMoviesBySearched(page, query, moviesLiveData)
         }
     }
 

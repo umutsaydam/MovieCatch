@@ -76,22 +76,50 @@ class HomeFragment : Fragment(), OnItemClickListener {
                 fetchMovies()
             }
         }
+
         return binding.root
     }
 
     private fun seeAllListeners() {
         val bundle = Bundle()
         binding.popularMoviesLinear.setOnClickListener {
-            bundle.putString(Constants.BUNDLE_SEE_ALL_MOVIE_KEY, Constants.BUNDLE_SEE_ALL_POPULAR_KEY)
+            bundle.putString(
+                Constants.BUNDLE_SEE_ALL_MOVIE_KEY,
+                Constants.BUNDLE_SEE_ALL_POPULAR_KEY
+            )
             bundle.putParcelableArrayList("genreList", ArrayList<Parcelable>(genreList!!))
             findNavController().navigate(R.id.action_homeFragment_to_seeAllFragment, bundle)
         }
 
         binding.recentMoviesLinear.setOnClickListener {
-            bundle.putString(Constants.BUNDLE_SEE_ALL_MOVIE_KEY, Constants.BUNDLE_SEE_ALL_RECENT_KEY)
+            bundle.putString(
+                Constants.BUNDLE_SEE_ALL_MOVIE_KEY,
+                Constants.BUNDLE_SEE_ALL_RECENT_KEY
+            )
             bundle.putParcelableArrayList("genreList", ArrayList<Parcelable>(genreList!!))
             findNavController().navigate(R.id.action_homeFragment_to_seeAllFragment, bundle)
         }
+
+        binding.searchView.setOnQueryTextListener(object :
+            androidx.appcompat.widget.SearchView.OnQueryTextListener,
+            android.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query != null) {
+                    bundle.putString(
+                        Constants.BUNDLE_SEE_ALL_MOVIE_KEY,
+                        Constants.BUNDLE_SEE_ALL_QUERY_KEY
+                    )
+                    bundle.putString(Constants.BUNDLE_SEE_ALL_QUERY_KEY, query.trim())
+                    bundle.putParcelableArrayList("genreList", ArrayList<Parcelable>(genreList!!))
+                    findNavController().navigate(R.id.action_homeFragment_to_seeAllFragment, bundle)
+                }
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return false
+            }
+        })
     }
 
     private fun initRecyclerViews() {
@@ -126,17 +154,17 @@ class HomeFragment : Fragment(), OnItemClickListener {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
-
     override fun onItemClickListener(movie: Result, genres: String) {
         val bundle = Bundle()
 
         bundle.putSerializable("movie", movie)
         bundle.putString("genres", genres)
         findNavController().navigate(R.id.action_homeFragment_to_movieDetailFragment, bundle)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
 }
