@@ -87,7 +87,7 @@ class SeeAllAdapter @Inject constructor(private val listener: OnItemClickListene
     companion object {
         val differCallback = object : DiffUtil.ItemCallback<Result>() {
             override fun areItemsTheSame(oldItem: Result, newItem: Result): Boolean {
-                Log.d("R8/W", oldItem.id.toString()+" 89 "+newItem.id.toString())
+                Log.d("R8/Q", oldItem.id.toString()+" 89 "+newItem.id.toString())
                 return oldItem.id == newItem.id
             }
 

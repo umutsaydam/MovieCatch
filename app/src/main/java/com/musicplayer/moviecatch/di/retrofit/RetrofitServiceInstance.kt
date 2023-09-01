@@ -35,4 +35,7 @@ interface RetrofitServiceInstance {
 
     @GET("3/search/movie?api_key=99effc409b6cda23954144eafe0cb25d")
     fun getMoviesBySearched(@Query("page") page: String, @Query("query") query: String): Call<Movie>
+
+    @GET("3/search/movie?api_key=99effc409b6cda23954144eafe0cb25d")
+    suspend fun getMoviesBySearched2(@Query("page") page: String, @Query("query") query: String): Response<Movie>
 }

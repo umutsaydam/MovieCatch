@@ -27,20 +27,15 @@ class RetrofitRepository @Inject constructor(private val retrofitServiceInstance
         })
     }
 
-    suspend fun getPopularMovies2(page: String): MutableList<Movie> {
-        Log.d("R8/W", page+" page degeri")
+    suspend fun getPopularMovies2(page: String): Movie? {
+        val response = retrofitServiceInstance.getPopularVideos2(page)
+        var data: Movie? = null
 
-        val liveData: MutableList<Movie> = mutableListOf()
-
-        val a = retrofitServiceInstance.getPopularVideos2(page)
-        if (!a.isSuccessful){
-            Log.d("R8/W", a.message()+" retrofit hataaa")
-        }else{
-            Log.d("R8/W", a.message()+" retrofit basarili")
-            liveData.add(a.body()!!)
-            //Log.d("R8/W", a.body().toString())
+        if (response.isSuccessful){
+            data = response.body()
         }
-        return liveData
+
+        return data
     }
 
     fun getAllGenres(liveData: MutableLiveData<Genre>) {
@@ -71,17 +66,15 @@ class RetrofitRepository @Inject constructor(private val retrofitServiceInstance
         })
     }
 
-    suspend fun getRecentMovies2(page: String): MutableList<Movie> {
-        val liveData: MutableList<Movie> = mutableListOf()
+    suspend fun getRecentMovies2(page: String): Movie? {
+        val response = retrofitServiceInstance.getRecentVideos2(page)
+        var data: Movie? = null
 
-        val a = retrofitServiceInstance.getRecentVideos2(page)
-        if (!a.isSuccessful){
-            Log.d("R8/W", a.message()+" retrofit hataaa")
-        }else{
-            Log.d("R8/W", a.message()+" retrofit basarili")
-            liveData.add(a.body()!!)
+        if (response.isSuccessful){
+            data = response.body()
         }
-        return liveData
+
+        return data
     }
 
     fun getMovieTrailer(id: String, trailersList: MutableLiveData<Trailer>) {
@@ -93,7 +86,7 @@ class RetrofitRepository @Inject constructor(private val retrofitServiceInstance
                 result.results.forEach {
                     if (it.type == "Trailer" && it.official) {
                         if (pureTrailer == null) {
-                            resultX = ArrayList<ResultX>()
+                            resultX = ArrayList()
                             resultX!!.add(ResultX(it.key, it.name, it.type, it.official, it.id))
                             pureTrailer = Trailer(result.id, resultX!!)
                         } else {
@@ -143,6 +136,17 @@ class RetrofitRepository @Inject constructor(private val retrofitServiceInstance
                     moviesLiveData.postValue(null)
                 }
             })
+    }
+
+    suspend fun getMoviesBySearched2(page: String, query: String): Movie? {
+        val response = retrofitServiceInstance.getMoviesBySearched2(page, query)
+        var data: Movie? = null
+
+        if (response.isSuccessful){
+            data = response.body()
+        }
+
+        return data
     }
 
 }

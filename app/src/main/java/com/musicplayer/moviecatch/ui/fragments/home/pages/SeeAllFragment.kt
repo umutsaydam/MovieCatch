@@ -19,7 +19,6 @@ import com.musicplayer.moviecatch.util.Constants
 import com.musicplayer.moviecatch.util.OnItemClickListener
 import com.musicplayer.moviecatch.viewmodel.SeeAllViewModel
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class SeeAllFragment : Fragment(), OnItemClickListener {
@@ -51,6 +50,7 @@ class SeeAllFragment : Fragment(), OnItemClickListener {
         }
         binding.seeAllTitleTxt.text = seeAllMovieKey
         viewModel.setMovieKey(seeAllMovieKey)
+        viewModel.setSearchQuery(query)
 
         seeAllAdapter = SeeAllAdapter(this)
 
@@ -84,7 +84,7 @@ class SeeAllFragment : Fragment(), OnItemClickListener {
 
     override fun onItemClickListener(movie: Result, genres: String) {
         val bundle = Bundle()
-        Log.d("W8", movie.toString() + " ıtemClick")
+        Log.d("W8", "$movie itemClick")
         bundle.putSerializable("movie", movie)
         bundle.putString("genres", genres)
         findNavController().navigate(R.id.action_seeAllFragment_to_movieDetailFragment, bundle)
