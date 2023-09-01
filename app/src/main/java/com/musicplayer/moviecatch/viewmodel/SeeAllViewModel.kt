@@ -17,7 +17,13 @@ class SeeAllViewModel @Inject constructor(private val repository: RetrofitReposi
     ViewModel() {
 
     var loading: MutableLiveData<Boolean> = MutableLiveData()
+    private var seeAllMovieKey: String? = null
+
     var movieList = Pager(PagingConfig(pageSize = 20, maxSize = 100)) {
-        MoviePagingSource(repository)
+        MoviePagingSource(repository, seeAllMovieKey!!)
     }.flow.cachedIn(viewModelScope)
+
+    fun setMovieKey(key: String) {
+        seeAllMovieKey = key
+    }
 }

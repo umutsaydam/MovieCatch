@@ -50,27 +50,12 @@ class SeeAllFragment : Fragment(), OnItemClickListener {
             query = arguments?.getString(Constants.BUNDLE_SEE_ALL_QUERY_KEY).toString()
         }
         binding.seeAllTitleTxt.text = seeAllMovieKey
-        // viewModel.setMovieKey(seeAllMovieKey)
+        viewModel.setMovieKey(seeAllMovieKey)
 
         seeAllAdapter = SeeAllAdapter(this)
 
         initRecycler()
 
-        /*viewModel.getObserverLiveData().observe(viewLifecycleOwner) {
-            if (it != null) {
-                Log.d("R/S", it.results.toString())
-                seeAllAdapter.setLists(it.results, genreList!!)
-            } else {
-                Log.d("R/S", "null")
-            }
-        }
-
-        if (query != ""){
-            viewModel.loadMovies("1", query)
-        }else{
-            viewModel.loadMovies("1")
-        }
-        */
         binding.backImg.setOnClickListener {
             activity?.onBackPressedDispatcher?.onBackPressed()
         }

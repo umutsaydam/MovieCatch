@@ -71,6 +71,19 @@ class RetrofitRepository @Inject constructor(private val retrofitServiceInstance
         })
     }
 
+    suspend fun getRecentMovies2(page: String): MutableList<Movie> {
+        val liveData: MutableList<Movie> = mutableListOf()
+
+        val a = retrofitServiceInstance.getRecentVideos2(page)
+        if (!a.isSuccessful){
+            Log.d("R8/W", a.message()+" retrofit hataaa")
+        }else{
+            Log.d("R8/W", a.message()+" retrofit basarili")
+            liveData.add(a.body()!!)
+        }
+        return liveData
+    }
+
     fun getMovieTrailer(id: String, trailersList: MutableLiveData<Trailer>) {
         retrofitServiceInstance.getTrailer(id).enqueue(object : Callback<Trailer> {
             override fun onResponse(call: Call<Trailer>, response: Response<Trailer>) {
