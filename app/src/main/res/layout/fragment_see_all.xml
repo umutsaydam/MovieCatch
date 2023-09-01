@@ -37,5 +37,6 @@
         android:layout_height="wrap_content"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:spanCount="2"
+        android:elevation="5dp"
         tools:listitem="@layout/see_all_item"/>
 </LinearLayout>

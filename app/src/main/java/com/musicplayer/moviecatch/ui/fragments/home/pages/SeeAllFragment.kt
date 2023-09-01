@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.musicplayer.moviecatch.R
 import com.musicplayer.moviecatch.adapter.SeeAllAdapter
@@ -18,6 +19,7 @@ import com.musicplayer.moviecatch.util.Constants
 import com.musicplayer.moviecatch.util.OnItemClickListener
 import com.musicplayer.moviecatch.viewmodel.SeeAllViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class SeeAllFragment : Fragment(), OnItemClickListener {
@@ -48,13 +50,13 @@ class SeeAllFragment : Fragment(), OnItemClickListener {
             query = arguments?.getString(Constants.BUNDLE_SEE_ALL_QUERY_KEY).toString()
         }
         binding.seeAllTitleTxt.text = seeAllMovieKey
-        viewModel.setMovieKey(seeAllMovieKey)
+        // viewModel.setMovieKey(seeAllMovieKey)
 
         seeAllAdapter = SeeAllAdapter(this)
 
         initRecycler()
 
-        viewModel.getObserverLiveData().observe(viewLifecycleOwner) {
+        /*viewModel.getObserverLiveData().observe(viewLifecycleOwner) {
             if (it != null) {
                 Log.d("R/S", it.results.toString())
                 seeAllAdapter.setLists(it.results, genreList!!)
@@ -68,7 +70,7 @@ class SeeAllFragment : Fragment(), OnItemClickListener {
         }else{
             viewModel.loadMovies("1")
         }
-
+        */
         binding.backImg.setOnClickListener {
             activity?.onBackPressedDispatcher?.onBackPressed()
         }
@@ -76,14 +78,28 @@ class SeeAllFragment : Fragment(), OnItemClickListener {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.apply {
+            lifecycleScope.launchWhenCreated {
+                viewModel.movieList.collect {
+                    Log.d("R8/W", it.toString())
+                    seeAllAdapter.submitData(lifecycle, it)
+                }
+            }
+        }
+    }
+
     private fun initRecycler() {
         val recycler = binding.seeAllRecycler
         recycler.adapter = seeAllAdapter
+        seeAllAdapter.setLists(genreList!!)
     }
 
     override fun onItemClickListener(movie: Result, genres: String) {
         val bundle = Bundle()
-        Log.d("W8", movie.toString())
+        Log.d("W8", movie.toString() + " ıtemClick")
         bundle.putSerializable("movie", movie)
         bundle.putString("genres", genres)
         findNavController().navigate(R.id.action_seeAllFragment_to_movieDetailFragment, bundle)

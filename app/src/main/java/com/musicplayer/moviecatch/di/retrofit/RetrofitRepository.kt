@@ -27,6 +27,22 @@ class RetrofitRepository @Inject constructor(private val retrofitServiceInstance
         })
     }
 
+    suspend fun getPopularMovies2(page: String): MutableList<Movie> {
+        Log.d("R8/W", page+" page degeri")
+
+        val liveData: MutableList<Movie> = mutableListOf()
+
+        val a = retrofitServiceInstance.getPopularVideos2(page)
+        if (!a.isSuccessful){
+            Log.d("R8/W", a.message()+" retrofit hataaa")
+        }else{
+            Log.d("R8/W", a.message()+" retrofit basarili")
+            liveData.add(a.body()!!)
+            //Log.d("R8/W", a.body().toString())
+        }
+        return liveData
+    }
+
     fun getAllGenres(liveData: MutableLiveData<Genre>) {
         retrofitServiceInstance.getGenres().enqueue(object : Callback<Genre> {
             override fun onResponse(call: Call<Genre>, response: Response<Genre>) {

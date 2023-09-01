@@ -7,22 +7,22 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.musicplayer.moviecatch.R
 import com.musicplayer.moviecatch.di.dao.GenreData
-import com.musicplayer.moviecatch.di.retrofit.RetrofitServiceInstance
 import com.musicplayer.moviecatch.models.Result
 import com.musicplayer.moviecatch.util.OnItemClickListener
 import java.util.Locale
+import javax.inject.Inject
 
-class SeeAllAdapter(private val listener: OnItemClickListener) :
-    RecyclerView.Adapter<SeeAllAdapter.SeeAllViewHolder>() {
-    private var movieList: List<Result>? = null
+class SeeAllAdapter @Inject constructor(private val listener: OnItemClickListener) :
+    PagingDataAdapter<Result, SeeAllAdapter.SeeAllViewHolder>(differCallback) {
     private var genreList: List<GenreData>? = null
 
-    fun setLists(list: List<Result>, genreList: List<GenreData>) {
-        movieList = list
+    fun setLists(genreList: List<GenreData>) {
         this.genreList = genreList
         notifyDataSetChanged()
     }
@@ -33,19 +33,15 @@ class SeeAllAdapter(private val listener: OnItemClickListener) :
         )
     }
 
-    override fun getItemCount(): Int {
-        if (movieList == null) {
-            return 0
-        }
-        return movieList!!.size
-    }
-
     override fun onBindViewHolder(holder: SeeAllViewHolder, position: Int) {
-        holder.bind(movieList!![position], genreList!!)
+        Log.d("R8/W", "adapter is working")
+        holder.bind(getItem(position)!!, genreList!!)
 
         holder.movieItemRelative.setOnClickListener {
-            listener.onItemClickListener(movieList!![position], holder.genres)
+            listener.onItemClickListener(getItem(position)!!, holder.genres)
         }
+        holder.setIsRecyclable(false)
+        Log.d("R8/W", "end of the onBindViewHolder")
     }
 
     class SeeAllViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -85,6 +81,20 @@ class SeeAllAdapter(private val listener: OnItemClickListener) :
             Glide.with(posterView)
                 .load("https://image.tmdb.org/t/p/w342/" + data.poster_path)
                 .into(posterView)
+        }
+    }
+
+    companion object {
+        val differCallback = object : DiffUtil.ItemCallback<Result>() {
+            override fun areItemsTheSame(oldItem: Result, newItem: Result): Boolean {
+                Log.d("R8/W", oldItem.id.toString()+" 89 "+newItem.id.toString())
+                return oldItem.id == newItem.id
+            }
+
+            override fun areContentsTheSame(oldItem: Result, newItem: Result): Boolean {
+                Log.d("R8/W", oldItem.toString()+" 94 "+newItem.toString())
+                return oldItem == newItem
+            }
         }
     }
 }
