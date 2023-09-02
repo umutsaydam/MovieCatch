@@ -78,9 +78,11 @@ class MovieAdapter(private val isFirstScreen: Boolean = true, private val listen
             }
             txtGenre.text = genres
 
-            Glide.with(posterView)
-                .load("https://image.tmdb.org/t/p/w342/" + data.poster_path)
-                .into(posterView)
+            if (data.poster_path != null) {
+                Glide.with(posterView)
+                    .load("https://image.tmdb.org/t/p/w342/" + data.poster_path)
+                    .into(posterView)
+            }
         }
     }
 }

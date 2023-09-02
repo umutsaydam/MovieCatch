@@ -78,21 +78,23 @@ class SeeAllAdapter @Inject constructor(private val listener: OnItemClickListene
 
             txtGenre.text = genres
 
-            Glide.with(posterView)
-                .load("https://image.tmdb.org/t/p/w342/" + data.poster_path)
-                .into(posterView)
+            if (data.poster_path != null) {
+                Glide.with(posterView)
+                    .load("https://image.tmdb.org/t/p/w342/" + data.poster_path)
+                    .into(posterView)
+            }
         }
     }
 
     companion object {
         val differCallback = object : DiffUtil.ItemCallback<Result>() {
             override fun areItemsTheSame(oldItem: Result, newItem: Result): Boolean {
-                Log.d("R8/Q", oldItem.id.toString()+" 89 "+newItem.id.toString())
+                Log.d("R8/Q", oldItem.id.toString() + " 89 " + newItem.id.toString())
                 return oldItem.id == newItem.id
             }
 
             override fun areContentsTheSame(oldItem: Result, newItem: Result): Boolean {
-                Log.d("R8/W", oldItem.toString()+" 94 "+newItem.toString())
+                Log.d("R8/W", oldItem.toString() + " 94 " + newItem.toString())
                 return oldItem == newItem
             }
         }

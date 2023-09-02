@@ -85,9 +85,12 @@ class RecentMovieAdapter(
 
             txtReleaseDate.text = data.release_date
             txtVoteAverage.text = "${data.vote_average} / 10"
-            Glide.with(posterView)
-                .load("https://image.tmdb.org/t/p/w342/" + data.poster_path)
-                .into(posterView)
+
+            if (data.poster_path != null) {
+                Glide.with(posterView)
+                    .load("https://image.tmdb.org/t/p/w342/" + data.poster_path)
+                    .into(posterView)
+            }
         }
     }
 }
