@@ -22,14 +22,24 @@ class MoviePagingSource(
 
             val responseData = getMovies(currentPage)
 
-            Log.d("R8/W", "if")
-            LoadResult.Page(
-                data = responseData!!,
-                prevKey = if (currentPage == 1) null else -1,
-                nextKey = if (responseData == null) null else currentPage.plus(1)
-            )
+
+            if (responseData != null && responseData.isEmpty()){
+                Log.d("R8/W", "if")
+                LoadResult.Page(
+                    data = responseData!!,
+                    prevKey = if (currentPage == 1) null else -1,
+                    nextKey = currentPage.plus(1)
+                )
+            }else{
+                Log.d("R8/Q", "else")
+                LoadResult.Page(
+                    data = responseData!!,
+                    prevKey = if (currentPage == 1) null else -1,
+                    nextKey = if (responseData == null) null else -1
+                )
+            }
         } catch (e: Exception) {
-            Log.d("R8/W", e.message.toString() + "* 36 MoviePaging")
+            Log.d("R8/W", e.message.toString() + "* 42 MoviePaging")
             LoadResult.Error(e)
         }
     }
