@@ -1,4 +1,4 @@
-package com.musicplayer.moviecatch.di.dao
+package com.musicplayer.moviecatch.di.dao.GenreDB
 
 import android.content.Context
 import androidx.room.Database

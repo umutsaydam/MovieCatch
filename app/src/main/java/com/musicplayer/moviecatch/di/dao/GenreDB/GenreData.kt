@@ -1,4 +1,4 @@
-package com.musicplayer.moviecatch.di.dao
+package com.musicplayer.moviecatch.di.dao.GenreDB
 
 
 import android.os.Parcel
@@ -19,8 +19,7 @@ data class GenreData(
         parcel.readInt(),
         parcel.readString()!!,
         parcel.readString()!!
-    ) {
-    }
+    )
 
     override fun describeContents(): Int {
         return 0

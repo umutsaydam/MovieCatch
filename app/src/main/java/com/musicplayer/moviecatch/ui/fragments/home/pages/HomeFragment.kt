@@ -14,7 +14,7 @@ import com.musicplayer.moviecatch.R
 import com.musicplayer.moviecatch.adapter.MovieAdapter
 import com.musicplayer.moviecatch.adapter.RecentMovieAdapter
 import com.musicplayer.moviecatch.databinding.FragmentHomeBinding
-import com.musicplayer.moviecatch.di.dao.GenreData
+import com.musicplayer.moviecatch.di.dao.GenreDB.GenreData
 import com.musicplayer.moviecatch.models.Result
 import com.musicplayer.moviecatch.util.Constants
 import com.musicplayer.moviecatch.util.OnItemClickListener

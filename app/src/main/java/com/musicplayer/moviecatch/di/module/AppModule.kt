@@ -3,8 +3,10 @@ package com.musicplayer.moviecatch.di.module
 import android.app.Application
 import android.content.Context
 import android.content.SharedPreferences
-import com.musicplayer.moviecatch.di.dao.GenreDao
-import com.musicplayer.moviecatch.di.dao.GenreDatabase
+import com.musicplayer.moviecatch.di.dao.FavMovieDB.FavMovieDao
+import com.musicplayer.moviecatch.di.dao.FavMovieDB.FavMovieDatabase
+import com.musicplayer.moviecatch.di.dao.GenreDB.GenreDao
+import com.musicplayer.moviecatch.di.dao.GenreDB.GenreDatabase
 import com.musicplayer.moviecatch.di.retrofit.RetrofitServiceInstance
 import com.musicplayer.moviecatch.prefs.SessionManager
 import com.musicplayer.moviecatch.util.Constants
@@ -42,6 +44,18 @@ class AppModule {
     @Singleton
     fun getDao(appDB: GenreDatabase): GenreDao {
         return appDB.getDAO()
+    }
+
+    @Provides
+    @Singleton
+    fun getFavMovieDB(context: Application): FavMovieDatabase {
+        return FavMovieDatabase.getFavMovieDB(context)
+    }
+
+    @Provides
+    @Singleton
+    fun getFavMovieDAO(appDB: FavMovieDatabase): FavMovieDao {
+        return appDB.getFavMovieDAO()
     }
 
     @Provides

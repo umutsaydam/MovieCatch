@@ -10,7 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.musicplayer.moviecatch.R
 import com.musicplayer.moviecatch.databinding.FragmentFifthBinding
-import com.musicplayer.moviecatch.di.dao.GenreData
+import com.musicplayer.moviecatch.di.dao.GenreDB.GenreData
 import com.musicplayer.moviecatch.util.StringHelper
 import com.musicplayer.moviecatch.viewmodel.GenreViewModel
 import com.musicplayer.moviecatch.viewmodel.HomePageViewModel

@@ -1,7 +1,5 @@
-package com.musicplayer.moviecatch.di.dao
+package com.musicplayer.moviecatch.di.dao.GenreDB
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import javax.inject.Inject
 
 class GenreRepository @Inject constructor(private val genreDao: GenreDao) {

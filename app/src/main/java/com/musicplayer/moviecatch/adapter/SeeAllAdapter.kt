@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.musicplayer.moviecatch.R
-import com.musicplayer.moviecatch.di.dao.GenreData
+import com.musicplayer.moviecatch.di.dao.GenreDB.GenreData
 import com.musicplayer.moviecatch.models.Result
 import com.musicplayer.moviecatch.util.OnItemClickListener
 import java.util.Locale

@@ -10,10 +10,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.musicplayer.moviecatch.R
 import com.musicplayer.moviecatch.adapter.TrailerAdapter
 import com.musicplayer.moviecatch.databinding.FragmentMovieDetailBinding
+import com.musicplayer.moviecatch.di.dao.FavMovieDB.FavMovieData
 import com.musicplayer.moviecatch.models.Result
 import com.musicplayer.moviecatch.models.ResultX
+import com.musicplayer.moviecatch.viewmodel.FavMovieViewModel
 import com.musicplayer.moviecatch.viewmodel.MovieDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -29,6 +32,10 @@ class MovieDetailFragment : Fragment() {
 
     private val viewModel by lazy {
         ViewModelProvider(this, defaultViewModelProviderFactory)[MovieDetailViewModel::class.java]
+    }
+
+    private val favMovieViewModel by lazy {
+        ViewModelProvider(this, defaultViewModelProviderFactory)[FavMovieViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -56,7 +63,7 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun initUI() {
-        if (movie != null) {
+        if (this.movie != null) {
             binding.collapsingToolbar.title = " "
             binding.collapsingToolbar
 
@@ -89,12 +96,44 @@ class MovieDetailFragment : Fragment() {
                     Log.d("R/R", "null")
                 }
             }
+            setFavImg(favMovieViewModel.isFavMovie(movie!!.id))
+            binding.favImg.setOnClickListener {
+                val isFavMovie = favMovieViewModel.isFavMovie(movie!!.id)
+
+                if (isFavMovie) {
+                    favMovieViewModel.deleteFavMovie(movie!!.id)
+                } else {
+                    favMovieViewModel.addFavMovie(FavMovieData(
+                        0,
+                        movie!!.backdrop_path,
+                        movie!!.genre_ids,
+                        movie!!.id,
+                        movie!!.overview,
+                        movie!!.popularity,
+                        movie!!.poster_path,
+                        movie!!.release_date,
+                        movie!!.title,
+                        movie!!.vote_average,
+                        movie!!.genrestringTr,
+                        movie!!.genrestring,
+                    ))
+                }
+                setFavImg(!isFavMovie)
+            }
 
             loadTrailers()
 
             binding.backImg.setOnClickListener {
                 activity?.onBackPressedDispatcher?.onBackPressed()
             }
+        }
+    }
+
+    private fun setFavImg(isFavMovie: Boolean) {
+        if (isFavMovie) {
+            binding.favImg.setImageResource(R.drawable.ic_heart_fill)
+        } else {
+            binding.favImg.setImageResource(R.drawable.ic_heart_blank)
         }
     }
 

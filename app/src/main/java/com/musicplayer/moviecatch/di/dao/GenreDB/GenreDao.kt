@@ -1,9 +1,7 @@
-package com.musicplayer.moviecatch.di.dao
+package com.musicplayer.moviecatch.di.dao.GenreDB
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
-import androidx.room.OnConflictStrategy
 import androidx.room.Query
 
 @Dao

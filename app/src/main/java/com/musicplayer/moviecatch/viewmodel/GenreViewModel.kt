@@ -2,8 +2,8 @@ package com.musicplayer.moviecatch.viewmodel
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.musicplayer.moviecatch.di.dao.GenreData
-import com.musicplayer.moviecatch.di.dao.GenreRepository
+import com.musicplayer.moviecatch.di.dao.GenreDB.GenreData
+import com.musicplayer.moviecatch.di.dao.GenreDB.GenreRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
