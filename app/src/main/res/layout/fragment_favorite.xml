@@ -14,8 +14,10 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/favMovieRecycler"
+            android:paddingHorizontal="8dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            tools:listitem="@layout/fav_movie_item"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </LinearLayout>

@@ -29,13 +29,18 @@
             android:id="@+id/textTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Test" />
+            android:textStyle="bold"
+            android:text="Barbie"
+            android:textColor="@color/movie_title"
+            android:textSize="18sp"/>
 
         <TextView
             android:id="@+id/txtGenre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Test, test" />
+            android:text="Adventure, Action"
+            android:textColor="@color/end_color"
+            android:textSize="14sp" />
 
     </LinearLayout>
 </RelativeLayout>

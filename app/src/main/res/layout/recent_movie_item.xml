@@ -19,7 +19,7 @@
             android:id="@+id/posterView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="@drawable/ic_movie"/>
+            android:src="@drawable/ic_movie" />
 
     </androidx.cardview.widget.CardView>
 
@@ -33,22 +33,29 @@
             android:id="@+id/textTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:text="Test" />
+            android:layout_marginBottom="2dp"
+            android:text="Barbie"
+            android:textColor="@color/movie_title"
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/txtGenre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
-            android:text="Test, test" />
+            android:text="Adventure, Action"
+            android:textColor="@color/end_color"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/txtReleaseDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
-            android:text="21.08.2023" />
+            android:text="21.08.2023"
+            android:textColor="@color/end_color"
+            android:textSize="14sp" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -58,8 +65,8 @@
             <ImageView
                 android:layout_width="16dp"
                 android:layout_height="16dp"
-                android:layout_marginEnd="4dp"
                 android:layout_gravity="center"
+                android:layout_marginEnd="4dp"
                 android:src="@drawable/ic_star"
                 app:tint="@color/icon_color" />
 
@@ -67,7 +74,9 @@
                 android:id="@+id/txtVoteAverage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="8/10" />
+                android:text="8/10"
+                android:textColor="@color/end_color"
+                android:textSize="14sp" />
         </LinearLayout>
 
 

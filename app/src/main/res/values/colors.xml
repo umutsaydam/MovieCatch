@@ -9,6 +9,7 @@
     <color name="action_color">#AE0000</color>
     <color name="light_dark_bg">#FFFFFF</color>
     <color name="text_color">#333333</color>
+    <color name="movie_title">#0E0E0E</color>
 
 
 </resources>

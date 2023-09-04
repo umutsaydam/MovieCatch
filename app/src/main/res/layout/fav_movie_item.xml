@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="5dp"
     android:id="@+id/recentMovieLinear"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="8dp"
     android:orientation="horizontal">
-
 
     <androidx.cardview.widget.CardView
         android:layout_width="342px"
@@ -33,22 +33,29 @@
             android:id="@+id/textTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:text="Test" />
+            android:layout_marginBottom="2dp"
+            android:textStyle="bold"
+            android:text="Barbie"
+            android:textColor="@color/movie_title"
+            android:textSize="18sp"/>
 
         <TextView
             android:id="@+id/txtGenre"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
-            android:text="Test, test" />
+            android:text="Adventure, Action"
+            android:textColor="@color/end_color"
+            android:textSize="14sp"/>
 
         <TextView
             android:id="@+id/txtReleaseDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
-            android:text="21.08.2023" />
+            android:text="21.08.2023"
+            android:textColor="@color/end_color"
+            android:textSize="14sp"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -67,7 +74,9 @@
                 android:id="@+id/txtVoteAverage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="8/10" />
+                android:text="8/10"
+                android:textColor="@color/end_color"
+                android:textSize="14sp"/>
         </LinearLayout>
 
 
