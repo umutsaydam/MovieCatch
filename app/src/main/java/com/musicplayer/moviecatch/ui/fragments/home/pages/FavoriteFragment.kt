@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.musicplayer.moviecatch.R
 import com.musicplayer.moviecatch.adapter.FavMovieAdapter
 import com.musicplayer.moviecatch.databinding.FragmentFavoriteBinding
@@ -37,14 +38,25 @@ class FavoriteFragment : Fragment(), OnItemClickListener {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
 
         initRecycler()
 
+        setObservers()
+
+        binding.swipeLayout.setOnRefreshListener {
+            favMovieViewModel.refreshData()
+        }
+
+        return binding.root
+    }
+
+    private fun setObservers() {
         favMovieViewModel.getObserverFavMovies().observe(viewLifecycleOwner) {
             if (it != null) {
                 favMovieAdapter.setFavMovieList(it, genreList)
+                binding.swipeLayout.isRefreshing = false
             } else {
                 Log.d("R10/Q", "null geliyor")
             }
@@ -58,8 +70,6 @@ class FavoriteFragment : Fragment(), OnItemClickListener {
                 Log.d("R10/Q", "genre null")
             }
         }
-
-        return binding.root
     }
 
     private fun fetchFavMovies() {

@@ -28,6 +28,11 @@ class FavMovieViewModel @Inject constructor(private val favMovieRepository: FavM
         return true
     }
 
+    fun refreshData(){
+        favMovieRepository.refreshData()
+        loadAllData()
+    }
+
     fun loadAllData() {
         allData.postValue(favMovieRepository.readAllData)
     }

@@ -5,7 +5,7 @@ import javax.inject.Inject
 
 class FavMovieRepository @Inject constructor(private val favMovieDao: FavMovieDao) {
 
-    val readAllData : List<FavMovieData> = favMovieDao.readAllMovies()
+    var readAllData : List<FavMovieData> = favMovieDao.readAllMovies()
 
     fun addMovie(movie: FavMovieData){
         favMovieDao.addMovie(movie)
@@ -17,5 +17,8 @@ class FavMovieRepository @Inject constructor(private val favMovieDao: FavMovieDa
 
     fun deleteFunMovie(favID: Int){
         favMovieDao.deleteFavMovie(favID)
+    }
+    fun refreshData(){
+        readAllData = favMovieDao.readAllMovies()
     }
 }
