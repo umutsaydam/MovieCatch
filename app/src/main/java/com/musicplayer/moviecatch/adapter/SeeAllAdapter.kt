@@ -72,9 +72,11 @@ class SeeAllAdapter @Inject constructor(private val listener: OnItemClickListene
                     }
                     Log.d("R/E", result!!.en_name)
                 }
-                genres = genres.substring(0, genres.lastIndex - 1)
-            }
 
+                if (genres != "") {
+                    genres = genres.substring(0, genres.lastIndex - 1)
+                }
+            }
 
             txtGenre.text = genres
 

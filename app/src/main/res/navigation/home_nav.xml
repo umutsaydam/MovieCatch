@@ -26,7 +26,11 @@
         android:id="@+id/favoriteFragment"
         android:name="com.musicplayer.moviecatch.ui.fragments.home.pages.FavoriteFragment"
         android:label="fragment_favorite"
-        tools:layout="@layout/fragment_favorite" />
+        tools:layout="@layout/fragment_favorite" >
+        <action
+            android:id="@+id/action_favoriteFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/movieDetailFragment"
         android:name="com.musicplayer.moviecatch.ui.fragments.home.pages.MovieDetailFragment"
@@ -38,6 +42,9 @@
         <action
             android:id="@+id/action_movieDetailFragment_to_seeAllFragment"
             app:destination="@id/seeAllFragment" />
+        <action
+            android:id="@+id/action_movieDetailFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
     </fragment>
     <fragment
         android:id="@+id/seeAllFragment"

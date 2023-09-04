@@ -13,8 +13,8 @@ class FavMovieViewModel @Inject constructor(private val favMovieRepository: FavM
 
     private var allData: MutableLiveData<List<FavMovieData>> = MutableLiveData()
 
-    init {
-        loadAllData()
+    fun getObserverFavMovies(): MutableLiveData<List<FavMovieData>> {
+        return allData
     }
 
     fun addFavMovie(movie: FavMovieData) {
@@ -28,7 +28,7 @@ class FavMovieViewModel @Inject constructor(private val favMovieRepository: FavM
         return true
     }
 
-    private fun loadAllData() {
+    fun loadAllData() {
         allData.postValue(favMovieRepository.readAllData)
     }
 

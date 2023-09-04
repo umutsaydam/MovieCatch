@@ -74,7 +74,9 @@ class MovieAdapter(private val isFirstScreen: Boolean = true, private val listen
                     }
                 }
 
-                genres = genres.substring(0, genres.lastIndex - 1)
+                if (genres != ""){
+                    genres = genres.substring(0, genres.lastIndex - 1)
+                }
             }
             txtGenre.text = genres
 
