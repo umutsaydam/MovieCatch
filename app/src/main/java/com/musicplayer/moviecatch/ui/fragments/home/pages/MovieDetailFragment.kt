@@ -28,7 +28,7 @@ class MovieDetailFragment : Fragment() {
     private var _binding: FragmentMovieDetailBinding? = null
     private val binding get() = _binding!!
     private var movie: Result? = null
-    private var genres: String = "dsfsdfdsfdf"
+    private var genres: String = ""
 
     private val viewModel by lazy {
         ViewModelProvider(this, defaultViewModelProviderFactory)[MovieDetailViewModel::class.java]
@@ -82,7 +82,6 @@ class MovieDetailFragment : Fragment() {
 
             viewModel.getObserverTrailerList().observe(viewLifecycleOwner) {
                 if (it != null) {
-                    Toast.makeText(context, it.results.toString(), Toast.LENGTH_SHORT).show()
                     loadVideosFromYoutube(it.results)
                 } else {
                     Log.d("R/R", "null")
@@ -102,6 +101,7 @@ class MovieDetailFragment : Fragment() {
 
                 if (isFavMovie) {
                     favMovieViewModel.deleteFavMovie(movie!!.id)
+                    Toast.makeText(context, "Removed from favorite list", Toast.LENGTH_SHORT).show()
                 } else {
                     favMovieViewModel.addFavMovie(FavMovieData(
                         0,
@@ -117,6 +117,7 @@ class MovieDetailFragment : Fragment() {
                         movie!!.genrestringTr,
                         movie!!.genrestring,
                     ))
+                    Toast.makeText(context, "Added to favorite list", Toast.LENGTH_SHORT).show()
                 }
                 setFavImg(!isFavMovie)
             }
