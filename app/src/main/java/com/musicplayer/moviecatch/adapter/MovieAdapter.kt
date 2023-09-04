@@ -52,7 +52,7 @@ class MovieAdapter(private val isFirstScreen: Boolean = true, private val listen
         private val textTitle: TextView = itemView.findViewById(R.id.textTitle)
         private val txtGenre: TextView = itemView.findViewById(R.id.txtGenre)
         private val posterView: ImageView = itemView.findViewById(R.id.posterView)
-        val movieItemRelative: RelativeLayout = itemView.findViewById(R.id.movieItemRelative)
+        val movieItemRelative: RelativeLayout = itemView.findViewById(R.id.movieCardView)
         var genres = ""
 
         fun bind(data: Result, genreList: List<GenreData>) {

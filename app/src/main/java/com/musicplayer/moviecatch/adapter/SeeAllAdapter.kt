@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -37,7 +37,7 @@ class SeeAllAdapter @Inject constructor(private val listener: OnItemClickListene
         Log.d("R8/W", "adapter is working")
         holder.bind(getItem(position)!!, genreList!!)
 
-        holder.movieItemRelative.setOnClickListener {
+        holder.movieCardView.setOnClickListener {
             listener.onItemClickListener(getItem(position)!!, holder.genres)
         }
         holder.setIsRecyclable(false)
@@ -48,7 +48,7 @@ class SeeAllAdapter @Inject constructor(private val listener: OnItemClickListene
         private val textTitle: TextView = itemView.findViewById(R.id.textTitle)
         private val txtGenre: TextView = itemView.findViewById(R.id.txtGenre)
         private val posterView: ImageView = itemView.findViewById(R.id.posterView)
-        val movieItemRelative: RelativeLayout = itemView.findViewById(R.id.movieItemRelative)
+        val movieCardView: CardView = itemView.findViewById(R.id.movieCardView)
 
         var genres = ""
 
