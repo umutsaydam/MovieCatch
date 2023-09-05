@@ -11,6 +11,7 @@
     <color name="text_color">#333333</color>
     <color name="movie_title">#323232</color>
     <color name="toolbar_color">#F1F1F1</color>
+    <color name="bottom_stroke">#6FB6B6B6</color>
 
 
 </resources>
