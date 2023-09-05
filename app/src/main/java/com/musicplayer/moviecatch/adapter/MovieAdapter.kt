@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.musicplayer.moviecatch.R
@@ -52,7 +52,7 @@ class MovieAdapter(private val isFirstScreen: Boolean = true, private val listen
         private val textTitle: TextView = itemView.findViewById(R.id.textTitle)
         private val txtGenre: TextView = itemView.findViewById(R.id.txtGenre)
         private val posterView: ImageView = itemView.findViewById(R.id.posterView)
-        val movieItemRelative: RelativeLayout = itemView.findViewById(R.id.movieCardView)
+        val movieItemRelative: CardView = itemView.findViewById(R.id.movieCardView)
         var genres = ""
 
         fun bind(data: Result, genreList: List<GenreData>) {

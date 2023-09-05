@@ -26,18 +26,24 @@ class SettingsFragment : Fragment() {
     }
 
     private fun initListeners() {
-        binding.themeLinear.setOnClickListener {
-            binding.switchTheme.toggle()
-            Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show()
+        val switchTheme = binding.switchTheme
+        switchTheme.setOnClickListener {
+            switchTheme.toggle()
+
+            changeTheme(switchTheme.isChecked)
         }
 
-        binding.switchTheme.setOnCheckedChangeListener { compoundButton, b ->
-            Toast.makeText(context, "Changed", Toast.LENGTH_SHORT).show()
+        switchTheme.setOnCheckedChangeListener { _, _ ->
+            changeTheme(switchTheme.isChecked)
         }
 
         binding.langLinear.setOnClickListener {
             Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun changeTheme(isChecked: Boolean) {
+
     }
 
     override fun onDestroy() {
