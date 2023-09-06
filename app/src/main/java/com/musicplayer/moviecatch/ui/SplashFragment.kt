@@ -1,6 +1,6 @@
 package com.musicplayer.moviecatch.ui
 
-import android.content.Intent
+
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -9,9 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import com.musicplayer.moviecatch.MainActivity
 import com.musicplayer.moviecatch.R
-import com.musicplayer.moviecatch.databinding.FragmentFavoriteBinding
 import com.musicplayer.moviecatch.databinding.FragmentSplashBinding
 import com.musicplayer.moviecatch.prefs.SessionManager
 import dagger.hilt.android.AndroidEntryPoint
@@ -35,6 +33,14 @@ class SplashFragment : Fragment() {
             if (sessionManager.getIsFirstRun()) {
                 findNavController().navigate(R.id.action_splashFragment_to_appIntroFragment)
             } else {
+                val appLang = sessionManager.getAppLang()
+                if (appLang != 1){
+                    sessionManager.setAppLang(
+                        requireContext(),
+                        resources.displayMetrics,
+                        appLang
+                    )
+                }
                 findNavController().navigate(R.id.action_splashFragment_to_mainFragment)
             }
         }, 3000)

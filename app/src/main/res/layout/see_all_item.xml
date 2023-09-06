@@ -45,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Adventure, Action"
-            style="@style/ThemeTextColor"
+            style="@style/ThemeTitleTextColor"
             android:textSize="12sp" />
 
     </LinearLayout>

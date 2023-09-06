@@ -1,17 +1,16 @@
 package com.musicplayer.moviecatch.ui.fragments.home.pages
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatDelegate
+import com.musicplayer.moviecatch.R
 import com.musicplayer.moviecatch.databinding.FragmentSettingsBinding
 import com.musicplayer.moviecatch.prefs.SessionManager
-import com.musicplayer.moviecatch.util.Constants
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -38,8 +37,8 @@ class SettingsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         if (session.getTheme()) {
             binding.switchTheme.isChecked = true
-            Log.d("R/WT", "(session.getTheme()")
         }
+        binding.langTxt.text = resources.getStringArray(R.array.langs)[session.getAppLang()]
     }
 
     private fun initListeners() {
@@ -47,18 +46,28 @@ class SettingsFragment : Fragment() {
         binding.themeLinear.setOnClickListener {
             switchTheme.toggle()
             changeTheme(switchTheme.isChecked)
-            Log.d("R/WT", "themeLinear")
         }
 
         switchTheme.setOnCheckedChangeListener { _, isChecked ->
             changeTheme(isChecked)
-            Log.d("R/WT", "switchTheme")
         }
 
         binding.langLinear.setOnClickListener {
-            Toast.makeText(context, "Clicked", Toast.LENGTH_SHORT).show()
-            Log.d("R/WT", "langLinear")
+            showPopUp()
         }
+    }
+
+    private fun showPopUp() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle(resources.getString(R.string.choose_lang))
+        builder.setItems(resources.getStringArray(R.array.langs)) { _, which ->
+            session.setAppLang(requireContext(), resources.displayMetrics, which)
+            requireActivity().apply {
+                finish()
+                startActivity(intent)
+            }
+        }
+        builder.show()
     }
 
     private fun changeTheme(isChecked: Boolean) {
