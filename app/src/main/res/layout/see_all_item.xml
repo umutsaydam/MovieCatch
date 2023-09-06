@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
+    style="@style/ThemeCardView"
     android:layout_margin="10dp"
     app:cardElevation="0dp">
 
@@ -35,7 +36,7 @@
             android:layout_height="wrap_content"
             android:letterSpacing="0.05"
             android:text="Barbie"
-            android:textColor="@color/movie_title"
+            style="@style/ThemeTitleTextColor"
             android:textSize="15sp"
             android:textStyle="bold" />
 
@@ -44,7 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Adventure, Action"
-            android:textColor="@color/end_color"
+            style="@style/ThemeTextColor"
             android:textSize="12sp" />
 
     </LinearLayout>

@@ -20,7 +20,7 @@
         android:layout_height="60dp"
         android:id="@+id/bottom_nav_bar"
         android:layout_gravity="bottom"
+        style="@style/ThemeBg"
         android:elevation="5dp"
-        android:background="@color/white"
         app:cnb_menuResource="@menu/nav_menu"/>
 </FrameLayout>

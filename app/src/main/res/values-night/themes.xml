@@ -4,4 +4,24 @@
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
     </style>
+
+    <style name="ThemeBg">
+        <item name="android:background">@color/black_200</item>
+    </style>
+
+    <style name="ThemeCardView">
+        <item name="cardBackgroundColor">@color/black_200</item>
+    </style>
+
+    <style name="ThemeTitleTextColor">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="ThemeSubTitleTextColor">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="IconTheme">
+        <item name="tint">@color/white</item>
+    </style>
 </resources>

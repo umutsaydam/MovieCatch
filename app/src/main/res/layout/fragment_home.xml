@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    style="@style/ThemeBg"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -16,9 +17,11 @@
 
         <androidx.constraintlayout.motion.widget.MotionLayout
             android:id="@+id/toolbarMotion"
+            style="@style/ThemeBg"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             app:layoutDescription="@xml/fragment_home_scene">
+
             <TextView
                 android:id="@+id/toolbarTitle"
                 android:layout_width="wrap_content"
@@ -26,44 +29,46 @@
                 android:layout_gravity="center"
                 android:text="@string/movie_catch"
                 android:textSize="16sp"
+                style="@style/ThemeTitleTextColor"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <SearchView
                 android:id="@+id/searchView"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_gravity="center"
+                android:clickable="false"
                 android:elevation="8dp"
                 android:iconifiedByDefault="false"
                 android:queryHint="Search Movie"
                 android:visibility="invisible"
-                android:clickable="false"
-                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/toolbarTitle"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <RelativeLayout
                 android:id="@+id/icSearchLayout"
                 android:layout_width="wrap_content"
-                android:minWidth="60dp"
                 android:layout_height="60dp"
-                app:layout_constraintHorizontal_bias="0.9"
                 android:layout_gravity="center_horizontal"
-                android:gravity="center_vertical|end"
                 android:layout_marginEnd="8dp"
-                app:layout_constraintTop_toTopOf="parent"
+                android:gravity="center_vertical|end"
+                android:minWidth="60dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent">
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.9"
+                app:layout_constraintTop_toTopOf="parent">
+
                 <ImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
                     android:contentDescription="@string/see_all"
                     android:src="@drawable/ic_search"
-                    app:tint="@color/black" />
+                    style="@style/IconTheme" />
             </RelativeLayout>
         </androidx.constraintlayout.motion.widget.MotionLayout>
     </LinearLayout>
@@ -92,6 +97,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="@string/popular_movies"
+                    style="@style/ThemeTitleTextColor"
                     android:textSize="17sp"
                     android:textStyle="bold" />
 
@@ -104,6 +110,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="4dp"
                         android:layout_weight="1"
+                        style="@style/ThemeSubTitleTextColor"
                         android:text="@string/see_all" />
 
                     <ImageView
@@ -121,7 +128,6 @@
                 android:id="@+id/recyclerPopularMv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:text="Hello World!"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -143,6 +149,7 @@
                     android:layout_weight="1"
                     android:text="@string/recent_movies"
                     android:textSize="17sp"
+                    style="@style/ThemeTitleTextColor"
                     android:textStyle="bold" />
 
                 <LinearLayout
@@ -154,6 +161,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="4dp"
                         android:layout_weight="1"
+                        style="@style/ThemeSubTitleTextColor"
                         android:text="@string/see_all" />
 
                     <ImageView

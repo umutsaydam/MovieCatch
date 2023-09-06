@@ -1,10 +1,12 @@
 package com.musicplayer.moviecatch.ui.fragments.home
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.navigation.fragment.findNavController
 import com.musicplayer.moviecatch.R
 import com.musicplayer.moviecatch.databinding.FragmentMainBinding
@@ -30,6 +32,11 @@ class MainFragment : Fragment() {
             session.setIsFirstRun(false)
         }
 
+        Log.d("R/8E", session.getTheme().toString())
+        if (session.getTheme()) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
+
         setupTabBar()
 
         return binding.root
@@ -47,7 +54,6 @@ class MainFragment : Fragment() {
 
                 R.id.nav_settings -> childFragmentManager.primaryNavigationFragment?.findNavController()
                     ?.navigate(R.id.settingsFragment)
-
             }
         }
     }

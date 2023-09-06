@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    style="@style/ThemeBg"
     tools:context=".ui.fragments.home.pages.MovieDetailFragment">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -81,6 +82,7 @@
                     android:layout_margin="8dp"
                     android:layout_weight="1"
                     android:letterSpacing="0.03"
+                    style="@style/ThemeTitleTextColor"
                     android:text="Barbie"
                     android:textSize="23sp"
                     android:textStyle="bold" />
@@ -105,6 +107,7 @@
                         android:id="@+id/txtVoteAverage"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        style="@style/ThemeSubTitleTextColor"
                         android:text="8/10" />
                 </LinearLayout>
             </LinearLayout>
@@ -114,6 +117,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                style="@style/ThemeSubTitleTextColor"
                 android:text="Action, Adventure, Romance" />
 
             <TextView
@@ -121,6 +125,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                style="@style/ThemeSubTitleTextColor"
                 android:text="01.08.2023" />
 
             <TextView
@@ -130,6 +135,7 @@
                 android:layout_margin="8dp"
                 android:letterSpacing="0.045"
                 android:nestedScrollingEnabled="false"
+                style="@style/ThemeSubTitleTextColor"
                 android:text="Jack Reacher must uncover the truth behind a major government conspiracy in order to clear his name. On the run as a fugitive from the law, Reacher uncovers a potential secret from his past that could change his life forever"
                 android:textSize="16sp" />
 

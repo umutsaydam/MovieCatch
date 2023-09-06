@@ -6,4 +6,24 @@
     </style>
 
     <style name="Theme.MovieCatch" parent="Base.Theme.MovieCatch" />
+
+    <style name="ThemeBg">
+        <item name="android:background">@color/white</item>
+    </style>
+
+    <style name="ThemeCardView">
+        <item name="cardBackgroundColor">@color/white</item>
+    </style>
+
+    <style name="ThemeTitleTextColor">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="ThemeSubTitleTextColor">
+        <item name="android:textColor">@color/end_color</item>
+    </style>
+
+    <style name="IconTheme">
+        <item name="tint">@color/black</item>
+    </style>
 </resources>
