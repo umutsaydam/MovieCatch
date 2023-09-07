@@ -71,7 +71,7 @@ class TrailerAdapter : RecyclerView.Adapter<TrailerAdapter.TrailViewHolder>() {
         }
 
         private fun resizeVideo(url: String): String{
-           val newUrl = url.substring(0,15)+"280"+url.substring(18,28)+"160"+url.substring(31, url.length)
+           val newUrl = url.substring(0,15)+"280"+url.substring(18,28)+"200"+url.substring(31, url.length)
             Log.d("R/A", newUrl + " *1*0*")
             return newUrl
         }

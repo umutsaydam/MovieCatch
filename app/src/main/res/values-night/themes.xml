@@ -24,4 +24,13 @@
     <style name="IconTheme">
         <item name="tint">@color/white</item>
     </style>
+
+    <style name="TrailerTint">
+        <item name="backgroundTint">@color/black_200</item>
+    </style>
+
+
+    <style name="ToolbarTheme">
+        <item name="contentScrim">@color/black_200</item>
+    </style>
 </resources>
